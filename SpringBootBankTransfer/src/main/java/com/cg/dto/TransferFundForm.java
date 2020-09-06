@@ -5,6 +5,9 @@ public class TransferFundForm {
 	private String fromAccountId;
 	private String toAccountId;
 	private double amt;
+	
+	
+	
 	public String getFromAccountId() {
 		return fromAccountId;
 	}
