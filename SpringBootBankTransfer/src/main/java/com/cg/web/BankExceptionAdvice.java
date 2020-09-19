@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.cg.dto.AccountMessage;
+import com.cg.dto.ErrorInfo;
 import com.cg.dto.ErrorMessage;
 import com.cg.exceptions.AccountException;
 import com.cg.exceptions.BalanceException;
 import com.cg.exceptions.CustomerException;
+import com.cg.exceptions.LoginException;
 import com.cg.exceptions.TransactionException;
 import com.cg.util.AccountConstants;
 
@@ -34,6 +36,13 @@ public class BankExceptionAdvice {
 	public ErrorMessage handleException2(Exception ex){
 		logger.error(ex.getMessage());
 		return new ErrorMessage(HttpStatus.BAD_REQUEST.toString(), ex.getMessage(),LocalDateTime.now().toString());
+	}
+	
+	@ExceptionHandler
+	@ResponseStatus(code=HttpStatus.FORBIDDEN)
+	public ErrorInfo handleLoginException(LoginException ex) {
+		return new ErrorInfo(HttpStatus.FORBIDDEN.toString(),ex.getMessage().toString());
+		
 	}
 
 	
